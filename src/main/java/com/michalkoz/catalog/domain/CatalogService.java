@@ -16,7 +16,7 @@ public class CatalogService {
 
     public CatalogService(){
         storage.put(1l, new Book(1l, "Book 1", "Author 1", 1999));
-        storage.put(2L, new Book(1L, "Ogniem i Mieczem", "Henryk Sienkiewicz", 1884));
+        storage.put(2L, new Book(1L, "Ogniem i mieczem", "Henryk Sienkiewicz", 1884));
         storage.put(3L, new Book(1L, "Pan Tadeusz", "Adam Mickiewicz", 1834));
         storage.put(3L, new Book(1L, "Chłopi", "Władysław Reymont", 1904));
 

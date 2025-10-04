@@ -23,10 +23,21 @@ public class BookaroOnlineStorageApplication implements CommandLineRunner {
         System.out.println( "Hello World!" );
     }
 
+    private final CatalogService catalogService;
+
+    // tu katalog service jest wstrzykniety
+    public BookaroOnlineStorageApplication( CatalogService catalogService ) {
+        this.catalogService = catalogService;
+    }
+
     @Override
     public void run(String... args) throws Exception {
-        CatalogService service = new CatalogService();
-        List<Book> books = service.findByTitle("Ogniem i Mieczem");
+//        CatalogService service = new CatalogService();
+        //juz nie wolamy recznie takiej zaleznosci
+//        List<Book> books = service.findByTitle("Ogniem i mieczem");
+
+        // tylko wstrzykujemy taka zaleznosc:
+        List<Book> books = catalogService.findByTitle("Ogniem i mieczem"); 
         books.forEach(System.out::println);
     }
 }
