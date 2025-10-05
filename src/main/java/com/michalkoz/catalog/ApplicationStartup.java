@@ -18,7 +18,7 @@ public class ApplicationStartup implements CommandLineRunner {
 
     public ApplicationStartup(CatalogController catalogController,
                               @Value("${Bookaro.catalog.query}") String title,
-                              @Value("${Bookaro.catalog.limit}") Long limit
+                              @Value("${Bookaro.catalog.limit:3}") Long limit
     ) {
         this.catalogController = catalogController;
         this.title = title;
