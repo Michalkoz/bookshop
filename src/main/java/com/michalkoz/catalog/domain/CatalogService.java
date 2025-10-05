@@ -18,8 +18,6 @@ public class CatalogService {
     public CatalogService(CatalogRepository repository) {
         this.repository = repository;
 
-
-
     }
 
 //    public List<Book> findByTitle(String title){
@@ -28,12 +26,12 @@ public class CatalogService {
 //                .filter(book -> book.title.startsWith(title))
 //                .collect(Collectors.toList());
 //    }
-    public List<Book> findAll(String title){
+
+    public List<Book> findByTitle(String title){
         return repository.findAll()
                 .stream()
                 .filter(book -> book.title.startsWith(title))
                 .collect(Collectors.toList());
-
 
     }
 }
