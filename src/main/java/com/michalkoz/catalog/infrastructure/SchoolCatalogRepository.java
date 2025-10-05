@@ -10,11 +10,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
-public class MemoryCatalogRepositoryImpl implements CatalogRepository {
+class SchoolCatalogRepository implements CatalogRepository {
 
     private final Map<Long, Book> storage = new ConcurrentHashMap<>();
 
-    public MemoryCatalogRepositoryImpl() {
+    public SchoolCatalogRepository() {
 
 
         storage.put(1L, new Book(1L, "Book 1", "Author 1", 1999));
