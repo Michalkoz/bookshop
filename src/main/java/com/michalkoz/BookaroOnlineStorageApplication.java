@@ -13,9 +13,10 @@ public class BookaroOnlineStorageApplication{
         SpringApplication.run(BookaroOnlineStorageApplication.class, args);
     }
 
-    @Bean
-    String query() {
-        return "Mężczyźni";
-    }
+    // usuwamy, nie bedziemy rejestrowac takich beanow w kontekscie springa
+//    @Bean
+//    String query() {
+//        return "Mężczyźni";
+//    }
 
 }
