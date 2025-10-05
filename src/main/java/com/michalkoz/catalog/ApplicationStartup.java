@@ -11,16 +11,18 @@ import java.util.List;
 public class ApplicationStartup implements CommandLineRunner {
 
     private final CatalogController catalogController;
+    private final String title;
 
-    public ApplicationStartup(CatalogController catalogController) {
+    public ApplicationStartup(CatalogController catalogController, String title) {
         this.catalogController = catalogController;
+        this.title = title;
     }
 
 
     @Override
     public void run(String... args) {
 
-        List<Book> books = catalogController.findByTitle("Pan");
+        List<Book> books = catalogController.findByTitle(title);
         System.out.println("********************************************************************************************");
         books.forEach(System.out::println);
         System.out.println("********************************************************************************************");
