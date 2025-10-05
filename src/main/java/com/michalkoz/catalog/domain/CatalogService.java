@@ -12,18 +12,24 @@ import java.util.stream.Collectors;
 @Service
 public class CatalogService {
 
-    private final Map<Long, Book> storage = new ConcurrentHashMap<>();
+    //bedziemy wstrzykiwac katalog repository
+    private final CatalogRepository repository;
 
-    public CatalogService(){
-        storage.put(1l, new Book(1l, "Book 1", "Author 1", 1999));
-        storage.put(2L, new Book(1L, "Ogniem i mieczem", "Henryk Sienkiewicz", 1884));
-        storage.put(3L, new Book(1L, "Pan Tadeusz", "Adam Mickiewicz", 1834));
-        storage.put(3L, new Book(1L, "Chłopi", "Władysław Reymont", 1904));
+    public CatalogService(CatalogRepository repository) {
+        this.repository = repository;
+
+
 
     }
 
-    public List<Book> findByTitle(String title){
-        return storage.values()
+//    public List<Book> findByTitle(String title){
+//        return repository.findAll()
+//                .stream()
+//                .filter(book -> book.title.startsWith(title))
+//                .collect(Collectors.toList());
+//    }
+    public List<Book> findAll(String title){
+        return repository.findAll()
                 .stream()
                 .filter(book -> book.title.startsWith(title))
                 .collect(Collectors.toList());
