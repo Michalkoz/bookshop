@@ -3,6 +3,7 @@ package com.michalkoz.catalog.infrastructure;
 import com.michalkoz.catalog.domain.Book;
 import com.michalkoz.catalog.domain.CatalogRepository;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
+@Primary
 class SchoolCatalogRepository implements CatalogRepository {
 
     private final Map<Long, Book> storage = new ConcurrentHashMap<>();
