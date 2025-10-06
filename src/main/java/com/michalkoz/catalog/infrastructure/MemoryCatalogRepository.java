@@ -33,10 +33,9 @@ class MemoryCatalogRepository implements CatalogRepository {
 
     @Override
     public void save(Book book) {
-            Long nextId = ID_NEXT_VALUE.getAndIncrement();
-            book.setId(nextId);
+            Long nextId = nextId();
+//            book.setId(nextId);
             storage.put(nextId, book);
-//        storage.put(nextId, book);
     }
 
     Long nextId(){
