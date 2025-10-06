@@ -11,14 +11,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
 public class CatalogService implements CatalogUseCase {
 
     private final CatalogRepository repository;
 
-//    public CatalogService(CatalogRepository repository) {
-//        this.repository = repository;
-//    }
+    public CatalogService(CatalogRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public List<Book> findByTitle(String title){
@@ -40,11 +39,7 @@ public class CatalogService implements CatalogUseCase {
 
     @Override
     public void addBook(Long id, String title, String author, Integer year) {
-        Book book = new Book();
-        book.setId(id);
-        book.setTitle(title);
-        book.setAuthor(author);
-        book.setYear(year);
+        Book book = new Book(id, title, author, year);
         repository.save(book);
     }
 
