@@ -1,5 +1,6 @@
 package com.michalkoz.catalog.application;
 
+import com.michalkoz.catalog.application.port.CatalogUseCase;
 import com.michalkoz.catalog.domain.Book;
 import com.michalkoz.catalog.domain.CatalogRepository;
 import org.springframework.stereotype.Service;
@@ -9,14 +10,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class CatalogService implements com.michalkoz.catalog.application.port.CatalogUseCase {
+public class CatalogService implements CatalogUseCase {
 
     private final CatalogRepository repository;
 
     public CatalogService(CatalogRepository repository) {
         this.repository = repository;
     }
-
 
     @Override
     public List<Book> findByTitle(String title){
@@ -37,9 +37,16 @@ public class CatalogService implements com.michalkoz.catalog.application.port.Ca
     }
 
     @Override
-    public void addBook(){
-
+    public void addBook(CreateBookCommand command) {
+        Book book = new Book(command.getId(), command.getTitle(), command.getAuthor(), command.getYear());
+        repository.save(book);
     }
+
+//    @Override
+//    public void addBook(Long id, String title, String author, Integer year) {
+//        Book book = new Book(id, title, author, year);
+//        repository.save(book);
+//    }
 
     @Override
     public void removeById(Long id){
