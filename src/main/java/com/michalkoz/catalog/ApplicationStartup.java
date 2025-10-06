@@ -1,35 +1,33 @@
 package com.michalkoz.catalog;
 
-import com.michalkoz.catalog.application.CatalogController;
+import com.michalkoz.catalog.application.port.CatalogUseCase;
 import com.michalkoz.catalog.domain.Book;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class ApplicationStartup implements CommandLineRunner {
+class ApplicationStartup implements CommandLineRunner {
 
-    private final CatalogController catalogController;
+    private final CatalogUseCase catalog;
     private final String title;
     private final Long limit;
 
-    public ApplicationStartup(CatalogController catalogController,
+    public ApplicationStartup(CatalogUseCase catalog,
                               @Value("${Bookaro.catalog.query}") String title,
                               @Value("${Bookaro.catalog.limit:3}") Long limit
     ) {
-        this.catalogController = catalogController;
+        this.catalog = catalog;
         this.title = title;
         this.limit = limit;
     }
 
-
     @Override
     public void run(String... args) {
 
-        List<Book> books = catalogController.findByTitle(title);
+        List<Book> books = catalog.findByTitle(title);
         System.out.println("********************************************************************************************");
         books.stream().limit(limit).forEach(System.out::println);
         System.out.println("********************************************************************************************");
