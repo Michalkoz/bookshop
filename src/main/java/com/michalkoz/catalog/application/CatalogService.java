@@ -29,12 +29,16 @@ public class CatalogService implements CatalogUseCase {
 
     @Override
     public List<Book> findAll(){
-        return null;
+        return repository.findAll();
     }
 
     @Override
     public Optional<Book> findOneByTitleAndAuthor(String title, String author){
-        return null;
+        return repository.findAll()
+                .stream()
+                .filter(book -> book.getTitle().startsWith(title))
+                .filter(book -> book.getAuthor().startsWith(author))
+                .findFirst();
     }
 
     @Override

@@ -28,14 +28,13 @@ class ApplicationStartup implements CommandLineRunner {
     public void run(String... args) {
         initData();
         findByTitle();
+        findAndUpdate();
+    }
+
+    private void findAndUpdate() {
     }
 
     private void initData() {
-//        catalog.addBook(new CatalogUseCase.CreateBookCommand("Book 1", "Author 1", 1999));
-//        catalog.addBook(new CatalogUseCase.CreateBookCommand("Ogniem i mieczem", "Henryk Sienkiewicz", 1884));
-//        catalog.addBook(new CatalogUseCase.CreateBookCommand("Pan Tadeusz", "Adam Mickiewicz", 1834));
-//        catalog.addBook(new CatalogUseCase.CreateBookCommand("Chłopi", "Władysław Reymont", 1904));
-//        catalog.addBook(new CatalogUseCase.CreateBookCommand("PanSamochodzik", "Zbigniew Nienacki", 1904));
 
         catalog.addBook("Book 1", "Author 1", 1999);
         catalog.addBook("Ogniem i mieczem", "Henryk Sienkiewicz", 1884);
