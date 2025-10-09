@@ -19,11 +19,11 @@ class MemoryCatalogRepository implements CatalogRepository {
     private final AtomicLong ID_NEXT_VALUE = new AtomicLong(0L);
 
     public MemoryCatalogRepository() {
-//        storage.put(1L, new Book(1L, "Book 1", "Author 1", 1999));
-//        storage.put(2L, new Book(2L, "Ogniem i mieczem", "Henryk Sienkiewicz", 1884));
-//        storage.put(3L, new Book(3L, "Pan Tadeusz", "Adam Mickiewicz", 1834));
-//        storage.put(4L, new Book(4L, "Chłopi", "Władysław Reymont", 1904));
-//        storage.put(5L, new Book(5L, "PanSamochodzik", "Zbigniew Nienacki", 1904));
+        storage.put(1L, new Book(1L, "Book 1", "Author 1", 1999));
+        storage.put(2L, new Book(2L, "Ogniem i mieczem", "Henryk Sienkiewicz", 1884));
+        storage.put(3L, new Book(3L, "Pan Tadeusz", "Adam Mickiewicz", 1834));
+        storage.put(4L, new Book(4L, "Chłopi", "Władysław Reymont", 1904));
+        storage.put(5L, new Book(5L, "PanSamochodzik", "Zbigniew Nienacki", 1904));
     }
 
     @Override
@@ -34,11 +34,11 @@ class MemoryCatalogRepository implements CatalogRepository {
     @Override
     public void save(Book book) {
             Long nextId = nextId();
-//            book.setId(nextId);
+            book.setId(nextId);
             storage.put(nextId, book);
     }
 
-    Long nextId(){
+    private Long nextId(){
         return ID_NEXT_VALUE.getAndIncrement();
     }
 }
