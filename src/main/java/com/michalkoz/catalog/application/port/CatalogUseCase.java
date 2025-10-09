@@ -16,7 +16,7 @@ public interface CatalogUseCase {
     Optional<Book> findOneByTitleAndAuthor(String title, String author);
 
 //    void addBook(CreateBookCommand createBookCommand);
-    void addBook(Long id, String title, String author, Integer year);
+    void addBook(String title, String author, Integer year);
 
     void removeById(Long id);
 
@@ -24,11 +24,11 @@ public interface CatalogUseCase {
 
     // @Value z Lomboka od razu pola są prywatne i finalne
 
-//    @Value
-//    class CreateBookCommand {
+    @Value
+    class CreateBookCommand {
 //        Long id;
-//        String title;
-//        String author;
-//        Integer year;
-//    }
+        String title;
+        String author;
+        Integer year;
+    }
 }

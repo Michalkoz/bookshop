@@ -26,7 +26,25 @@ class ApplicationStartup implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        initData();
+        findByTitle();
+    }
 
+    private void initData() {
+//        catalog.addBook(new CatalogUseCase.CreateBookCommand("Book 1", "Author 1", 1999));
+//        catalog.addBook(new CatalogUseCase.CreateBookCommand("Ogniem i mieczem", "Henryk Sienkiewicz", 1884));
+//        catalog.addBook(new CatalogUseCase.CreateBookCommand("Pan Tadeusz", "Adam Mickiewicz", 1834));
+//        catalog.addBook(new CatalogUseCase.CreateBookCommand("Chłopi", "Władysław Reymont", 1904));
+//        catalog.addBook(new CatalogUseCase.CreateBookCommand("PanSamochodzik", "Zbigniew Nienacki", 1904));
+
+        catalog.addBook("Book 1", "Author 1", 1999);
+        catalog.addBook("Ogniem i mieczem", "Henryk Sienkiewicz", 1884);
+        catalog.addBook("Pan Tadeusz", "Adam Mickiewicz", 1834);
+        catalog.addBook("Chłopi", "Władysław Reymont", 1904);
+        catalog.addBook("PanSamochodzik", "Zbigniew Nienacki", 1904);
+    }
+
+    private void findByTitle() {
         List<Book> books = catalog.findByTitle(title);
         System.out.println("********************************************************************************************");
         books.stream().limit(limit).forEach(System.out::println);
