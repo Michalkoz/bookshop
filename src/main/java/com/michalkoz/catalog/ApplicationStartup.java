@@ -29,9 +29,7 @@ class ApplicationStartup implements CommandLineRunner {
         initData();
         findByTitle();
         findAndUpdate();
-    }
-
-    private void findAndUpdate() {
+        findByTitle();
     }
 
     private void initData() {
@@ -48,5 +46,22 @@ class ApplicationStartup implements CommandLineRunner {
         System.out.println("********************************************************************************************");
         books.stream().limit(limit).forEach(System.out::println);
         System.out.println("********************************************************************************************");
+    }
+
+    private void findAndUpdate() {
+        catalog.findOneByTitleAndAuthor("Pan Tadeusz", "Adam Mickiewicz")
+                .ifPresent(book -> {
+//                    Book updatedBook = new Book(
+//                        book.getId(),
+//                        "Pan Tadeusz, czyli Ostatni Zajazd na Litwie",
+//                        book.getAuthor(),
+//                        book.getYear()
+//                    );
+                    catalog.updateBook(
+                            book.getId(),
+                            "Pan Tadeusz, czyli Ostatni Zajazd na Litwie",
+                            book.getAuthor(),
+                            book.getYear());
+                });
     }
 }

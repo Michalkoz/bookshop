@@ -6,6 +6,7 @@ import com.michalkoz.catalog.domain.CatalogRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,7 +21,7 @@ public class CatalogService implements CatalogUseCase {
     }
 
     @Override
-    public List<Book> findByTitle(String title){
+    public List<Book> findByTitle(String title) {
         return repository.findAll()
                 .stream()
                 .filter(book -> book.title.startsWith(title))
@@ -28,16 +29,16 @@ public class CatalogService implements CatalogUseCase {
     }
 
     @Override
-    public List<Book> findAll(){
+    public List<Book> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Optional<Book> findOneByTitleAndAuthor(String title, String author){
+    public Optional<Book> findOneByTitleAndAuthor(String title, String author) {
         return repository.findAll()
                 .stream()
-                .filter(book -> book.getTitle().startsWith(title))
-                .filter(book -> book.getAuthor().startsWith(author))
+                .filter(book -> book.title.startsWith(title))
+                .filter(book -> book.author.startsWith(author))
                 .findFirst();
     }
 
@@ -46,18 +47,26 @@ public class CatalogService implements CatalogUseCase {
 //        Book book = new Book(command.getTitle(),command.getAuthor(), command.getYear());
     public void addBook(String title, String author, Integer year) {
         Book book = new Book(title, author, year);
-
         repository.save(book);
     }
 
 
     @Override
-    public void removeById(Long id){
-
+    public void removeById(Long id) {
+        // implementacja do uzupełnienia
     }
 
     @Override
-    public void updateBook(){
+    public UpdateBookResponse updateBook(Long id, String title, String author, Integer year) {
+        return repository.findById(id)
+                .map(book -> {
+                    book.setTitle(title);
+                    book.setAuthor(author);
+                    book.setYear(year);
+                    repository.save(book);
+                    return UpdateBookResponse.SUCCESS;
+                })
+                .orElseGet(() -> new UpdateBookResponse(false, Arrays.asList("Book not found with id:" + id)));
 
     }
 }

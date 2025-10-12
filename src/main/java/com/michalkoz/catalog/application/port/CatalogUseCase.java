@@ -1,10 +1,10 @@
 package com.michalkoz.catalog.application.port;
 
 import com.michalkoz.catalog.domain.Book;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
 import lombok.Value;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,15 +20,30 @@ public interface CatalogUseCase {
 
     void removeById(Long id);
 
-    void updateBook();
+    UpdateBookResponse updateBook(Long id, String title, String author, Integer year);
+//    void updateBook(Long id, String title, String author, Integer year);
 
     // @Value z Lomboka od razu pola są prywatne i finalne
 
-    @Value
-    class CreateBookCommand {
+//    @Value
+//    class CreateBookCommand {
 //        Long id;
-        String title;
-        String author;
-        Integer year;
+
+//        String title;
+//        String author;
+//        Integer year;
+//    }
+
+//    @AllArgsConstructor
+    public static class UpdateBookResponse {
+        public static UpdateBookResponse SUCCESS = new UpdateBookResponse(true, Collections.emptyList());
+
+        boolean success;
+        List<String> errors;
+
+        public UpdateBookResponse(boolean success, List<String> errors) {
+            this.success = success;
+            this.errors = errors;
+        }
     }
 }
